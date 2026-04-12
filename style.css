@@ -94,31 +94,22 @@ html, body {
   align-items: stretch;
   justify-content: center;
   opacity: 0;
-  visibility: hidden;
   pointer-events: none;
   transform: translateX(60px);
-  transition:
-    opacity var(--transition),
-    transform var(--transition),
-    visibility 0s linear 0.35s;
+  transition: opacity var(--transition), transform var(--transition);
   padding: 1rem 1.5rem;
   overflow-y: auto;
+  cursor: pointer;
 }
 
 .slide.active {
   opacity: 1;
-  visibility: visible;
   pointer-events: auto;
   transform: translateX(0);
-  transition:
-    opacity var(--transition),
-    transform var(--transition),
-    visibility 0s linear 0s;
 }
 
 .slide.exit-left {
   opacity: 0;
-  visibility: hidden;
   transform: translateX(-60px);
   pointer-events: none;
 }
@@ -135,7 +126,6 @@ html, body {
   gap: 0.9rem;
   position: relative;
   overflow: hidden;
-  min-height: 180px;
 }
 
 .slide-inner::before {
@@ -237,7 +227,7 @@ h2 {
   background: var(--purple-pale);
   border: 2px solid var(--purple-light);
   border-radius: 12px;
-  padding: 0.9rem 1.4rem;
+  padding: 0.8rem 1.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -253,91 +243,51 @@ h2 {
   padding: 1rem 1.8rem;
 }
 
-.vect {
-  --vect-color: currentColor;
+/* Correction robuste des vecteurs : flèche CSS, sans Unicode combinant */
+.vec {
   position: relative;
-  display: inline-flex;
-  align-items: flex-end;
-  vertical-align: middle;
-  padding-top: 0.4em;
-  margin: 0 0.04em;
-  line-height: 1;
-}
-
-.vect-body {
   display: inline-block;
-  position: relative;
-  line-height: 1;
+  font-weight: 800;
+  line-height: 1.1;
+  color: inherit;
   white-space: nowrap;
+  padding-top: 0.42em;
 }
 
-.vect::before {
+.vec::before {
   content: "";
   position: absolute;
   left: 0.08em;
-  right: 0.28em;
-  top: 0.10em;
-  border-top: 2px solid var(--vect-color);
+  right: 0.40em;
+  top: 0.08em;
+  border-top: 2px solid currentColor;
 }
 
-.vect::after {
+.vec::after {
   content: "";
   position: absolute;
-  top: 0.02em;
-  right: 0.02em;
-  width: 0.42em;
-  height: 0.42em;
-  border-top: 2px solid var(--vect-color);
-  border-right: 2px solid var(--vect-color);
+  top: 0.00em;
+  right: 0.04em;
+  width: 0.32em;
+  height: 0.32em;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
   transform: rotate(45deg);
   transform-origin: center;
-}
-
-.vect-v {
-  --vect-color: var(--purple-main);
-  color: var(--purple-main);
-}
-
-.vect-mm {
-  --vect-color: var(--red);
-  color: var(--red);
-}
-
-.vect sub {
-  font-size: 0.62em;
-  line-height: 0;
-  position: relative;
-  bottom: -0.18em;
 }
 
 .frac {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   vertical-align: middle;
   margin: 0 0.2em;
-  gap: 2px;
+  gap: 1px;
 }
 
-.frac-num,
-.frac-den {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1.1;
-  white-space: nowrap;
-}
-
-.frac-num { padding-bottom: 2px; }
-.frac-bar {
-  width: 100%;
-  min-width: 3.2em;
-  height: 2px;
-  background: currentColor;
-  display: block;
-}
-.frac-den { padding-top: 2px; }
+.frac-num { font-weight: 700; padding-bottom: 1px; }
+.frac-bar { width: 100%; height: 2px; background: currentColor; display: block; }
+.frac-den { font-weight: 700; padding-top: 1px; }
 
 .legend-grid {
   display: grid;
@@ -599,12 +549,14 @@ h2 {
 }
 
 .nav-dot {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: rgba(200,176,216,0.3);
   transition: background 0.3s, transform 0.3s;
   cursor: pointer;
+  border: none;
+  padding: 0;
 }
 
 .nav-dot.active {
