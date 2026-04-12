@@ -94,22 +94,31 @@ html, body {
   align-items: stretch;
   justify-content: center;
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
   transform: translateX(60px);
-  transition: opacity var(--transition), transform var(--transition);
+  transition:
+    opacity var(--transition),
+    transform var(--transition),
+    visibility 0s linear 0.35s;
   padding: 1rem 1.5rem;
   overflow-y: auto;
-  cursor: pointer;
 }
 
 .slide.active {
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
   transform: translateX(0);
+  transition:
+    opacity var(--transition),
+    transform var(--transition),
+    visibility 0s linear 0s;
 }
 
 .slide.exit-left {
   opacity: 0;
+  visibility: hidden;
   transform: translateX(-60px);
   pointer-events: none;
 }
@@ -126,6 +135,7 @@ html, body {
   gap: 0.9rem;
   position: relative;
   overflow: hidden;
+  min-height: 180px;
 }
 
 .slide-inner::before {
@@ -243,7 +253,6 @@ h2 {
   padding: 1rem 1.8rem;
 }
 
-/* --- vrai composant de vecteur --- */
 .vect {
   --vect-color: currentColor;
   position: relative;
