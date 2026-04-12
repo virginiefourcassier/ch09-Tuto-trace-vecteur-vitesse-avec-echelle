@@ -46,9 +46,11 @@
         <p class="title-sub">Un tutoriel pas à pas pour maîtriser la méthode</p>
 
         <div class="formula-box intro-formula">
-          <span class="vec">v</span>(M<sub>i</sub>) =
+          <span class="vect vect-v"><span class="vect-body">v</span></span>(M<sub>i</sub>) =
           <span class="frac">
-            <span class="frac-num"><span class="vec">M<sub>i</sub>M<sub>i+1</sub></span></span>
+            <span class="frac-num">
+              <span class="vect vect-mm"><span class="vect-body">M<sub>i</sub>M<sub>i+1</sub></span></span>
+            </span>
             <span class="frac-bar"></span>
             <span class="frac-den">Δt</span>
           </span>
@@ -65,9 +67,11 @@
         <p class="step-intro">Le vecteur vitesse d'un point M<sub>i</sub> est défini par :</p>
 
         <div class="formula-box big-formula">
-          <span class="vec">v</span>(M<sub>i</sub>) =
+          <span class="vect vect-v"><span class="vect-body">v</span></span>(M<sub>i</sub>) =
           <span class="frac">
-            <span class="frac-num"><span class="vec">M<sub>i</sub>M<sub>i+1</sub></span></span>
+            <span class="frac-num">
+              <span class="vect vect-mm"><span class="vect-body">M<sub>i</sub>M<sub>i+1</sub></span></span>
+            </span>
             <span class="frac-bar"></span>
             <span class="frac-den">Δt</span>
           </span>
@@ -77,10 +81,13 @@
           <div class="legend-item" data-delay="0">
             <div class="legend-dot" style="background:#6a3fa0"></div>
             <div>
-              <strong><span class="vec">M<sub>i</sub>M<sub>i+1</sub></span></strong>
+              <strong>
+                <span class="vect vect-mm"><span class="vect-body">M<sub>i</sub>M<sub>i+1</sub></span></span>
+              </strong>
               <span>— vecteur déplacement entre deux positions consécutives</span>
             </div>
           </div>
+
           <div class="legend-item" data-delay="200">
             <div class="legend-dot" style="background:#b04040"></div>
             <div>
@@ -88,13 +95,17 @@
               <span>— durée entre deux enregistrements (en secondes)</span>
             </div>
           </div>
+
           <div class="legend-item" data-delay="400">
             <div class="legend-dot" style="background:#2d7d4f"></div>
             <div>
-              <strong><span class="vec">v</span>(M<sub>i</sub>)</strong>
+              <strong>
+                <span class="vect vect-v"><span class="vect-body">v</span></span>(M<sub>i</sub>)
+              </strong>
               <span>— vecteur vitesse au point M<sub>i</sub>, en m/s</span>
             </div>
           </div>
+
           <div class="legend-item" data-delay="600">
             <div class="legend-dot" style="background:#c07820"></div>
             <div>
@@ -106,52 +117,14 @@
       </div>
     </section>
 
-    <section class="slide" id="slide2">
-      <div class="slide-inner">
-        <div class="step-label">Étape 2</div>
-        <h2>L'enregistrement du mouvement</h2>
-        <p class="step-intro">Un stroboscope enregistre la position du point à intervalles réguliers Δt = 0,4 s.</p>
-        <div class="svg-wrap">
-          <svg id="svgStep2" viewBox="0 0 700 200" width="100%" preserveAspectRatio="xMidYMid meet">
-            <g id="gridStep2"></g>
-            <g id="rulerStep2"></g>
-            <g id="pointsStep2"></g>
-            <g id="dtLabels"></g>
-          </svg>
-        </div>
-        <div class="info-row" id="infoStep2">
-          <div class="info-chip chip-purple">Δt = 0,4 s entre chaque point</div>
-          <div class="info-chip chip-blue">Échelle distances : 1 cm → 0,5 m</div>
-          <div class="info-chip chip-green">Mouvement : rectiligne uniforme</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="slide" id="slide3">
-      <div class="slide-inner">
-        <div class="step-label">Étape 3</div>
-        <h2>Identifier M<sub>i</sub> et M<sub>i+1</sub></h2>
-        <p class="step-intro">On choisit de calculer le vecteur vitesse en M<sub>2</sub>. On repère M<sub>2</sub> puis M<sub>3</sub>.</p>
-        <div class="svg-wrap">
-          <svg id="svgStep3" viewBox="0 0 700 200" width="100%" preserveAspectRatio="xMidYMid meet">
-            <g id="gridStep3"></g>
-            <g id="rulerStep3"></g>
-            <g id="pointsStep3"></g>
-            <g id="highlightStep3"></g>
-          </svg>
-        </div>
-        <div class="info-row">
-          <div class="info-chip chip-purple">M<sub>2</sub> = origine du déplacement étudié</div>
-          <div class="info-chip chip-orange">M<sub>3</sub> = extrémité du déplacement étudié</div>
-        </div>
-      </div>
-    </section>
-
     <section class="slide" id="slide4">
       <div class="slide-inner">
         <div class="step-label">Étape 4</div>
-        <h2>Le vecteur déplacement <span class="vec">M<sub>2</sub>M<sub>3</sub></span></h2>
+        <h2>Le vecteur déplacement
+          <span class="vect vect-mm"><span class="vect-body">M<sub>2</sub>M<sub>3</sub></span></span>
+        </h2>
         <p class="step-intro">On trace le vecteur déplacement puis on mesure sa longueur sur le graphe.</p>
+
         <div class="svg-wrap">
           <svg id="svgStep4" viewBox="0 0 700 200" width="100%" preserveAspectRatio="xMidYMid meet">
             <defs>
@@ -165,14 +138,19 @@
             <g id="displArrow"></g>
           </svg>
         </div>
+
         <div class="measure-box" id="measureDispl">
           <div class="measure-line">
             <span class="measure-label">Sur le graphe :</span>
-            <span class="measure-value"><span class="vec">M<sub>2</sub>M<sub>3</sub></span> = <strong>0,96 cm</strong></span>
+            <span class="measure-value">
+              <span class="vect vect-mm"><span class="vect-body">M<sub>2</sub>M<sub>3</sub></span></span> = <strong>0,96 cm</strong>
+            </span>
           </div>
           <div class="measure-line">
             <span class="measure-label">En réel :</span>
-            <span class="measure-value"><span class="vec">M<sub>2</sub>M<sub>3</sub></span> = <strong>0,48 m</strong></span>
+            <span class="measure-value">
+              <span class="vect vect-mm"><span class="vect-body">M<sub>2</sub>M<sub>3</sub></span></span> = <strong>0,48 m</strong>
+            </span>
           </div>
         </div>
       </div>
@@ -181,15 +159,21 @@
     <section class="slide" id="slide5">
       <div class="slide-inner">
         <div class="step-label">Étape 5</div>
-        <h2>Calculer la norme de <span class="vec">v</span>(M<sub>2</sub>)</h2>
+        <h2>Calculer la norme de
+          <span class="vect vect-v"><span class="vect-body">v</span></span>(M<sub>2</sub>)
+        </h2>
         <p class="step-intro">On applique maintenant la relation numérique.</p>
 
         <div class="calc-steps" id="calcSteps">
           <div class="calc-line" data-delay="0">
-            <span class="calc-lhs"><span class="vec">v</span>(M<sub>2</sub>) =</span>
+            <span class="calc-lhs">
+              <span class="vect vect-v"><span class="vect-body">v</span></span>(M<sub>2</sub>) =
+            </span>
             <span class="calc-rhs">
               <span class="frac">
-                <span class="frac-num"><span class="vec">M<sub>2</sub>M<sub>3</sub></span></span>
+                <span class="frac-num">
+                  <span class="vect vect-mm"><span class="vect-body">M<sub>2</sub>M<sub>3</sub></span></span>
+                </span>
                 <span class="frac-bar"></span>
                 <span class="frac-den">Δt</span>
               </span>
@@ -197,7 +181,7 @@
           </div>
 
           <div class="calc-line" data-delay="500">
-            <span class="calc-lhs">‖<span class="vec">v</span>‖ =</span>
+            <span class="calc-lhs">‖<span class="vect vect-v"><span class="vect-body">v</span></span>‖ =</span>
             <span class="calc-rhs">
               <span class="frac">
                 <span class="frac-num">0,48 m</span>
@@ -208,7 +192,7 @@
           </div>
 
           <div class="calc-line result-line" data-delay="1000">
-            <span class="calc-lhs">‖<span class="vec">v</span>‖ =</span>
+            <span class="calc-lhs">‖<span class="vect vect-v"><span class="vect-body">v</span></span>‖ =</span>
             <span class="calc-rhs result-val">1,20 m/s</span>
           </div>
         </div>
@@ -235,7 +219,7 @@
             <div class="scale-formula">
               Longueur flèche =
               <span class="frac" style="font-size:1em">
-                <span class="frac-num">‖<span class="vec">v</span>‖</span>
+                <span class="frac-num">‖<span class="vect vect-v"><span class="vect-body">v</span></span>‖</span>
                 <span class="frac-bar"></span>
                 <span class="frac-den">échelle</span>
               </span>
@@ -264,7 +248,6 @@
               </defs>
 
               <line id="arrowDemoLine" x1="90" y1="40" x2="181.2" y2="40" stroke="#6a3fa0" stroke-width="3" marker-end="url(#arrowDemo)"/>
-              <text x="190" y="28" font-size="10" fill="#6a3fa0" font-family="Nunito"><tspan> </tspan></text>
               <text x="140" y="58" text-anchor="middle" font-size="10" fill="#6a3fa0" font-family="Nunito">2,40 cm</text>
             </svg>
           </div>
@@ -275,7 +258,9 @@
     <section class="slide" id="slide7">
       <div class="slide-inner">
         <div class="step-label">Étape 7</div>
-        <h2>Tracer le vecteur <span class="vec">v</span>(M<sub>2</sub>)</h2>
+        <h2>Tracer le vecteur
+          <span class="vect vect-v"><span class="vect-body">v</span></span>(M<sub>2</sub>)
+        </h2>
         <p class="step-intro">La flèche part de M<sub>2</sub>, dans le sens du mouvement, avec la bonne longueur.</p>
 
         <div class="svg-wrap">
@@ -311,7 +296,11 @@
         <div class="recap-grid">
           <div class="recap-card" data-delay="0">
             <div class="recap-num">1</div>
-            <div class="recap-text">Écrire la formule <span class="vec">v</span>(M<sub>i</sub>) = <span class="vec">M<sub>i</sub>M<sub>i+1</sub></span> / Δt</div>
+            <div class="recap-text">
+              Écrire la formule
+              <span class="vect vect-v"><span class="vect-body">v</span></span>(M<sub>i</sub>) =
+              <span class="vect vect-mm"><span class="vect-body">M<sub>i</sub>M<sub>i+1</sub></span></span> / Δt
+            </div>
           </div>
           <div class="recap-card" data-delay="150">
             <div class="recap-num">2</div>
