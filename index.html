@@ -32,8 +32,7 @@
 
   <main class="slides-container" id="slidesContainer">
 
-    <!-- slide 0 -->
-    <section class="slide active" id="slide0">
+    <section class="slide active" id="slide0" role="group" aria-label="Diapositive 1 sur 9">
       <div class="slide-inner title-slide">
         <div class="title-icon-wrap">
           <svg viewBox="0 0 80 80" width="80" height="80" fill="none" aria-hidden="true">
@@ -63,12 +62,11 @@
           </span>
         </div>
 
-        <p class="click-hint">Clique dans la page pour passer à la suite →</p>
+        <p class="click-hint">Clique sur SUIVANT pour passer à la suite</p>
       </div>
     </section>
 
-    <!-- slide 1 -->
-    <section class="slide" id="slide1">
+    <section class="slide" id="slide1" role="group" aria-label="Diapositive 2 sur 9">
       <div class="slide-inner">
         <div class="step-label">Étape 1</div>
         <h2>La formule fondamentale</h2>
@@ -121,8 +119,7 @@
       </div>
     </section>
 
-    <!-- slide 2 -->
-    <section class="slide" id="slide2">
+    <section class="slide" id="slide2" role="group" aria-label="Diapositive 3 sur 9">
       <div class="slide-inner">
         <div class="step-label">Étape 2</div>
         <h2>L’enregistrement du mouvement</h2>
@@ -147,8 +144,7 @@
       </div>
     </section>
 
-    <!-- slide 3 -->
-    <section class="slide" id="slide3">
+    <section class="slide" id="slide3" role="group" aria-label="Diapositive 4 sur 9">
       <div class="slide-inner">
         <div class="step-label">Étape 3</div>
         <h2>Identifier M<sub>i</sub> et M<sub>i+1</sub></h2>
@@ -172,8 +168,7 @@
       </div>
     </section>
 
-    <!-- slide 4 -->
-    <section class="slide" id="slide4">
+    <section class="slide" id="slide4" role="group" aria-label="Diapositive 5 sur 9">
       <div class="slide-inner">
         <div class="step-label">Étape 4</div>
         <h2>Le vecteur déplacement <span class="vec">M<sub>2</sub>M<sub>3</sub></span></h2>
@@ -208,8 +203,7 @@
       </div>
     </section>
 
-    <!-- slide 5 -->
-    <section class="slide" id="slide5">
+    <section class="slide" id="slide5" role="group" aria-label="Diapositive 6 sur 9">
       <div class="slide-inner">
         <div class="step-label">Étape 5</div>
         <h2>Calculer la norme de <span class="vec">v</span>(M<sub>2</sub>)</h2>
@@ -247,14 +241,13 @@
         </div>
 
         <div class="info-row">
-          <div class="info-chip chip-green">La norme donne la rapidité du point</div>
+          <div class="info-chip chip-green">La norme donne la valeur de la vitesse du point</div>
           <div class="info-chip chip-purple">La direction est celle du mouvement</div>
         </div>
       </div>
     </section>
 
-    <!-- slide 6 -->
-    <section class="slide" id="slide6">
+    <section class="slide" id="slide6" role="group" aria-label="Diapositive 7 sur 9">
       <div class="slide-inner">
         <div class="step-label">Étape 6</div>
         <h2>Convertir avec l’échelle des vecteurs</h2>
@@ -307,8 +300,7 @@
       </div>
     </section>
 
-    <!-- slide 7 -->
-    <section class="slide" id="slide7">
+    <section class="slide" id="slide7" role="group" aria-label="Diapositive 8 sur 9">
       <div class="slide-inner">
         <div class="step-label">Étape 7</div>
         <h2>Tracer le vecteur <span class="vec">v</span>(M<sub>2</sub>)</h2>
@@ -341,8 +333,7 @@
       </div>
     </section>
 
-    <!-- slide 8 -->
-    <section class="slide" id="slide8">
+    <section class="slide" id="slide8" role="group" aria-label="Diapositive 9 sur 9">
       <div class="slide-inner">
         <div class="step-label">Récap</div>
         <h2>Synthèse de la méthode</h2>
@@ -385,12 +376,13 @@
         <p class="click-hint" style="margin-top:0.5rem">Clique encore pour recommencer ensuite</p>
       </div>
     </section>
+
   </main>
 
-  <nav class="nav-bar">
-    <button class="nav-btn" id="btnPrev" disabled>← Précédent</button>
-    <div class="nav-dots" id="navDots"></div>
-    <button class="nav-btn nav-btn-primary" id="btnNext">Suivant →</button>
+  <nav class="nav-bar" aria-label="Navigation des diapositives">
+    <button class="nav-btn" id="btnPrev" disabled aria-label="Diapositive précédente">← Précédent</button>
+    <div class="nav-dots" id="navDots" aria-label="Choix de la diapositive"></div>
+    <button class="nav-btn nav-btn-primary" id="btnNext" aria-label="Diapositive suivante">Suivant →</button>
   </nav>
 
   <script src="script.js"></script>
