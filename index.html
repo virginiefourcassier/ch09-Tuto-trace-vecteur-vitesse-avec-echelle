@@ -11,7 +11,6 @@
 </head>
 <body>
 
-<!-- HEADER -->
 <header class="site-header">
   <div class="header-left">
     <svg class="header-icon" viewBox="0 0 28 28" fill="none" aria-label="Vecteur vitesse">
@@ -25,15 +24,12 @@
   <div class="step-badge" id="stepBadge">Étape <span id="stepNum">0</span> / 7</div>
 </header>
 
-<!-- PROGRESS BAR -->
 <div class="progress-bar-wrap">
   <div class="progress-bar-fill" id="progressFill"></div>
 </div>
 
-<!-- SLIDES CONTAINER -->
 <main class="slides-container">
 
-  <!-- ÉTAPE 0 — Écran titre -->
   <section class="slide active" id="slide0">
     <div class="slide-inner title-slide">
       <div class="title-icon-wrap">
@@ -48,7 +44,7 @@
       <h1 class="title-main">Comment représenter<br>un <em>vecteur vitesse</em> ?</h1>
       <p class="title-sub">Un tutoriel pas à pas pour maîtriser la méthode</p>
       <div class="formula-box intro-formula">
-        <span class="vec-v">v&#x20D7;</span>(M<sub>i</sub>) =
+        <span class="vec-v">v</span>(M<sub>i</sub>) =
         <span class="frac">
           <span class="frac-num"><span class="vec-mm">M<sub>i</sub>M<sub>i+1</sub></span></span>
           <span class="frac-bar"></span>
@@ -59,7 +55,6 @@
     </div>
   </section>
 
-  <!-- ÉTAPE 1 — La formule -->
   <section class="slide" id="slide1">
     <div class="slide-inner">
       <div class="step-label">Étape 1</div>
@@ -67,7 +62,7 @@
       <p class="step-intro">Le vecteur vitesse d'un point M<sub>i</sub> est défini par :</p>
 
       <div class="formula-box big-formula">
-        <span class="vec-v">v&#x20D7;</span>(M<sub>i</sub>) =
+        <span class="vec-v">v</span>(M<sub>i</sub>) =
         <span class="frac">
           <span class="frac-num"><span class="vec-mm">M<sub>i</sub>M<sub>i+1</sub></span></span>
           <span class="frac-bar"></span>
@@ -93,7 +88,7 @@
         <div class="legend-item" data-delay="400">
           <div class="legend-dot" style="background:#2d7d4f"></div>
           <div>
-            <strong><span class="vec-v">v&#x20D7;</span>(M<sub>i</sub>)</strong>
+            <strong><span class="vec-v">v</span>(M<sub>i</sub>)</strong>
             <span>— vecteur vitesse au point M<sub>i</sub>, en m/s</span>
           </div>
         </div>
@@ -108,7 +103,6 @@
     </div>
   </section>
 
-  <!-- ÉTAPE 2 — L'enregistrement -->
   <section class="slide" id="slide2">
     <div class="slide-inner">
       <div class="step-label">Étape 2</div>
@@ -132,7 +126,6 @@
     </div>
   </section>
 
-  <!-- ÉTAPE 3 — Identifier Mᵢ et Mᵢ₊₁ -->
   <section class="slide" id="slide3">
     <div class="slide-inner">
       <div class="step-label">Étape 3</div>
@@ -155,7 +148,6 @@
     </div>
   </section>
 
-  <!-- ÉTAPE 4 — Tracer le vecteur déplacement -->
   <section class="slide" id="slide4">
     <div class="slide-inner">
       <div class="step-label">Étape 4</div>
@@ -164,6 +156,11 @@
 
       <div class="svg-wrap">
         <svg id="svgStep4" viewBox="0 0 700 200" width="100%" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <marker id="arrowDispl" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="#b04040"/>
+            </marker>
+          </defs>
           <g id="gridStep4"></g>
           <g id="rulerStep4"></g>
           <g id="pointsStep4"></g>
@@ -184,16 +181,15 @@
     </div>
   </section>
 
-  <!-- ÉTAPE 5 — Calcul de la norme -->
   <section class="slide" id="slide5">
     <div class="slide-inner">
       <div class="step-label">Étape 5</div>
-      <h2>Calculer la norme de <span class="vec-v">v&#x20D7;</span>(M<sub>2</sub>)</h2>
+      <h2>Calculer la norme de <span class="vec-v">v</span>(M<sub>2</sub>)</h2>
       <p class="step-intro">On applique la formule avec les valeurs numériques :</p>
 
       <div class="calc-steps" id="calcSteps">
         <div class="calc-line" data-delay="0">
-          <span class="calc-lhs"><span class="vec-v">v&#x20D7;</span>(M<sub>2</sub>) =</span>
+          <span class="calc-lhs"><span class="vec-v">v</span>(M<sub>2</sub>) =</span>
           <span class="calc-rhs">
             <span class="frac">
               <span class="frac-num"><span class="vec-mm">M<sub>2</sub>M<sub>3</sub></span></span>
@@ -203,7 +199,7 @@
           </span>
         </div>
         <div class="calc-line" data-delay="500">
-          <span class="calc-lhs">‖<span class="vec-v">v&#x20D7;</span>‖ =</span>
+          <span class="calc-lhs">‖<span class="vec-v">v</span>‖ =</span>
           <span class="calc-rhs">
             <span class="frac">
               <span class="frac-num">0,48 m</span>
@@ -213,7 +209,7 @@
           </span>
         </div>
         <div class="calc-line result-line" data-delay="1100">
-          <span class="calc-lhs">‖<span class="vec-v">v&#x20D7;</span>‖ =</span>
+          <span class="calc-lhs">‖<span class="vec-v">v</span>‖ =</span>
           <span class="calc-rhs result-val">1,20 m/s</span>
         </div>
       </div>
@@ -225,7 +221,6 @@
     </div>
   </section>
 
-  <!-- ÉTAPE 6 — Échelle vecteurs -->
   <section class="slide" id="slide6">
     <div class="slide-inner">
       <div class="step-label">Étape 6</div>
@@ -240,7 +235,7 @@
           <div class="scale-formula">
             Longueur flèche =
             <span class="frac" style="font-size:1em">
-              <span class="frac-num">‖<span class="vec-v">v&#x20D7;</span>‖</span>
+              <span class="frac-num">‖<span class="vec-v">v</span>‖</span>
               <span class="frac-bar"></span>
               <span class="frac-den">échelle</span>
             </span>
@@ -261,7 +256,12 @@
             <text x="39" y="28" text-anchor="middle" font-size="10" fill="#888" font-family="Nunito">1 cm</text>
             <text x="39" y="58" text-anchor="middle" font-size="10" fill="#888" font-family="Nunito">= 0,5 m/s</text>
 
-            <line id="arrowDemoLine" x1="90" y1="40" x2="90" y2="40" stroke="#6a3fa0" stroke-width="3"/>
+            <defs>
+              <marker id="arrowDemo" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L8,3 z" fill="#6a3fa0"/>
+              </marker>
+            </defs>
+            <line id="arrowDemoLine" x1="90" y1="40" x2="90" y2="40" stroke="#6a3fa0" stroke-width="3" marker-end="url(#arrowDemo)"/>
             <text x="90" y="28" text-anchor="start" font-size="10" fill="#6a3fa0" font-family="Nunito" id="arrowDemoLabel"></text>
             <text x="235" y="58" text-anchor="middle" font-size="10" fill="#6a3fa0" font-family="Nunito" id="arrowDemoLen"></text>
           </svg>
@@ -270,15 +270,22 @@
     </div>
   </section>
 
-  <!-- ÉTAPE 7 — Tracer la flèche -->
   <section class="slide" id="slide7">
     <div class="slide-inner">
       <div class="step-label">Étape 7</div>
-      <h2>Tracer le vecteur <span class="vec-v">v&#x20D7;</span>(M<sub>2</sub>) sur le graphe</h2>
+      <h2>Tracer le vecteur <span class="vec-v">v</span>(M<sub>2</sub>) sur le graphe</h2>
       <p class="step-intro">La flèche part de M<sub>2</sub>, dans la direction du mouvement, et mesure 2,40 cm.</p>
 
       <div class="svg-wrap">
         <svg id="svgStep7" viewBox="0 0 700 220" width="100%" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <marker id="arrowVit7" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
+              <path d="M0,0 L0,8 L10,4 z" fill="#6a3fa0"/>
+            </marker>
+            <marker id="arrowDispl7" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="#b04040" opacity="0.5"/>
+            </marker>
+          </defs>
           <g id="gridStep7"></g>
           <g id="rulerStep7"></g>
           <g id="pointsStep7"></g>
@@ -294,7 +301,6 @@
     </div>
   </section>
 
-  <!-- ÉTAPE 8 — Récap final -->
   <section class="slide" id="slide8">
     <div class="slide-inner">
       <div class="step-label">Récap</div>
@@ -303,7 +309,7 @@
       <div class="recap-grid">
         <div class="recap-card" data-delay="0">
           <div class="recap-num">1</div>
-          <div class="recap-text">Écrire la formule <span class="vec-v">v&#x20D7;</span>(M<sub>i</sub>) = <span class="vec-mm">M<sub>i</sub>M<sub>i+1</sub></span> / Δt</div>
+          <div class="recap-text">Écrire la formule <span class="vec-v">v</span>(M<sub>i</sub>) = <span class="vec-mm">M<sub>i</sub>M<sub>i+1</sub></span> / Δt</div>
         </div>
         <div class="recap-card" data-delay="150">
           <div class="recap-num">2</div>
@@ -315,7 +321,7 @@
         </div>
         <div class="recap-card" data-delay="450">
           <div class="recap-num">4</div>
-          <div class="recap-text">Calculer ‖<span class="vec-v">v&#x20D7;</span>‖ = distance réelle / Δt (en m/s)</div>
+          <div class="recap-text">Calculer ‖<span class="vec-v">v</span>‖ = distance réelle / Δt (en m/s)</div>
         </div>
         <div class="recap-card" data-delay="600">
           <div class="recap-num">5</div>
@@ -329,6 +335,11 @@
 
       <div class="svg-wrap" style="margin-top:0.8rem">
         <svg id="svgRecap" viewBox="0 0 700 130" width="100%" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <marker id="arrowRecap" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
+              <path d="M0,0 L0,8 L10,4 z" fill="#6a3fa0"/>
+            </marker>
+          </defs>
           <g id="gridRecap"></g>
           <g id="rulerRecap"></g>
           <g id="pointsRecap"></g>
@@ -342,7 +353,6 @@
 
 </main>
 
-<!-- NAVIGATION -->
 <nav class="nav-bar">
   <button class="nav-btn" id="btnPrev" disabled>← Précédent</button>
   <div class="nav-dots" id="navDots"></div>
