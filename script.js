@@ -158,27 +158,6 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-/* Flèches de vecteurs :
-   on remplace le simple contenu texte des balises .vec
-   par des lettres avec flèche combinante au-dessus */
-function vectorizeTextPreserveHTML(node) {
-  node.childNodes.forEach(child => {
-    if (child.nodeType === Node.TEXT_NODE) {
-      child.textContent = child.textContent.replace(/([A-Za-zM])/g, '$1\u20D7');
-    } else if (child.nodeType === Node.ELEMENT_NODE) {
-      vectorizeTextPreserveHTML(child);
-    }
-  });
-}
-
-function applyVectorArrows() {
-  document.querySelectorAll('.vec').forEach(el => {
-    if (el.dataset.vectorized === 'true') return;
-    vectorizeTextPreserveHTML(el);
-    el.dataset.vectorized = 'true';
-  });
-}
-
 function ns(tag) {
   return document.createElementNS('http://www.w3.org/2000/svg', tag);
 }
@@ -416,7 +395,6 @@ function onSlideEnter(i) {
 
 function init() {
   initDots();
-  applyVectorArrows();
   updateUI();
   onSlideEnter(0);
 }
