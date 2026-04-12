@@ -30,12 +30,21 @@ const btnNext = document.getElementById('btnNext');
 const progressF = document.getElementById('progressFill');
 const navDots = document.getElementById('navDots');
 const stepBadge = document.getElementById('stepBadge');
+const slides = [...document.querySelectorAll('.slide')];
 
-for (let i = 0; i < TOTAL_SLIDES; i++) {
-  const d = document.createElement('div');
-  d.className = 'nav-dot' + (i === 0 ? ' active' : '');
-  d.addEventListener('click', () => goTo(i));
-  navDots.appendChild(d);
+function initDots() {
+  navDots.innerHTML = '';
+  for (let i = 0; i < TOTAL_SLIDES; i++) {
+    const d = document.createElement('button');
+    d.type = 'button';
+    d.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', `Aller à la diapositive ${i + 1}`);
+    d.addEventListener('click', (e) => {
+      e.stopPropagation();
+      goTo(i);
+    });
+    navDots.appendChild(d);
+  }
 }
 
 function updateUI() {
@@ -55,15 +64,12 @@ function updateUI() {
   document.querySelectorAll('.nav-dot').forEach((d, i) => {
     d.classList.toggle('active', i === current);
     d.classList.toggle('done', i < current);
+    d.setAttribute('aria-pressed', i === current ? 'true' : 'false');
   });
-}
 
-function showOnlySlide(index) {
-  document.querySelectorAll('.slide').forEach((slide, i) => {
-    slide.classList.remove('active', 'exit-left');
-    if (i === index) {
-      slide.classList.add('active');
-    }
+  slides.forEach((slide, i) => {
+    slide.classList.toggle('active', i === current);
+    slide.setAttribute('aria-hidden', i === current ? 'false' : 'true');
   });
 }
 
@@ -78,33 +84,114 @@ function revealWithDelay(selector, className = 'revealed') {
 function goTo(idx) {
   if (idx < 0) idx = 0;
   if (idx > TOTAL_SLIDES - 1) idx = 0;
+  if (idx === current) return;
+
+  const oldSlide = document.getElementById('slide' + current);
+  const newSlide = document.getElementById('slide' + idx);
+
+  if (oldSlide) {
+    oldSlide.classList.remove('active');
+    oldSlide.classList.add('exit-left');
+    setTimeout(() => {
+      oldSlide.classList.remove('exit-left');
+    }, 400);
+  }
 
   current = idx;
-  showOnlySlide(current);
+
+  if (newSlide) {
+    newSlide.classList.add('active');
+  }
+
   updateUI();
   onSlideEnter(current);
 }
 
-btnNext.addEventListener('click', () => {
+function nextSlide() {
   if (current === TOTAL_SLIDES - 1) {
     goTo(0);
   } else {
     goTo(current + 1);
   }
+}
+
+function prevSlide() {
+  goTo(current - 1);
+}
+
+btnNext.addEventListener('click', (e) => {
+  e.stopPropagation();
+  nextSlide();
 });
 
-btnPrev.addEventListener('click', () => {
-  goTo(current - 1);
+btnPrev.addEventListener('click', (e) => {
+  e.stopPropagation();
+  prevSlide();
 });
+
+slides.forEach((slide, index) => {
+  slide.addEventListener('click', (e) => {
+    if (e.target.closest('.nav-bar')) return;
+    if (e.target.closest('button')) return;
+    if (e.target.closest('.nav-dot')) return;
+    if (index !== current) return;
+    nextSlide();
+  });
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === 'Enter') {
+    e.preventDefault();
+    nextSlide();
+  }
+  if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+    e.preventDefault();
+    prevSlide();
+  }
+  if (e.key === 'Home') {
+    e.preventDefault();
+    goTo(0);
+  }
+  if (e.key === 'End') {
+    e.preventDefault();
+    goTo(TOTAL_SLIDES - 1);
+  }
+});
+
+/* Flèches de vecteurs :
+   on remplace le simple contenu texte des balises .vec
+   par des lettres avec flèche combinante au-dessus */
+function vectorizeTextPreserveHTML(node) {
+  node.childNodes.forEach(child => {
+    if (child.nodeType === Node.TEXT_NODE) {
+      child.textContent = child.textContent.replace(/([A-Za-zM])/g, '$1\u20D7');
+    } else if (child.nodeType === Node.ELEMENT_NODE) {
+      vectorizeTextPreserveHTML(child);
+    }
+  });
+}
+
+function applyVectorArrows() {
+  document.querySelectorAll('.vec').forEach(el => {
+    if (el.dataset.vectorized === 'true') return;
+    vectorizeTextPreserveHTML(el);
+    el.dataset.vectorized = 'true';
+  });
+}
 
 function ns(tag) {
   return document.createElementNS('http://www.w3.org/2000/svg', tag);
 }
 
+function clearGroup(id) {
+  const g = document.getElementById(id);
+  if (g) g.innerHTML = '';
+  return g;
+}
+
 function buildGrid(parentId, W, H, yTrack, yRul) {
-  const g = document.getElementById(parentId);
+  const g = clearGroup(parentId);
   if (!g) return;
-  g.innerHTML = '';
 
   const cmTotal = (W - ML - 15) / PX;
   const sub = 0.2;
@@ -143,9 +230,8 @@ function buildGrid(parentId, W, H, yTrack, yRul) {
 }
 
 function buildRuler(parentId, W, yRul) {
-  const g = document.getElementById(parentId);
+  const g = clearGroup(parentId);
   if (!g) return;
-  g.innerHTML = '';
 
   const axis = ns('line');
   axis.setAttribute('x1', ML);
@@ -177,9 +263,8 @@ function buildRuler(parentId, W, yRul) {
 }
 
 function buildPoints(parentId, highlight = []) {
-  const g = document.getElementById(parentId);
+  const g = clearGroup(parentId);
   if (!g) return;
-  g.innerHTML = '';
 
   for (let i = 0; i < DATA.n; i++) {
     const x = ptX(i);
@@ -206,9 +291,8 @@ function drawStep2() {
   buildRuler('rulerStep2', 700, Y_RUL);
   buildPoints('pointsStep2');
 
-  const dt = document.getElementById('dtLabels');
+  const dt = clearGroup('dtLabels');
   if (!dt) return;
-  dt.innerHTML = '';
 
   for (let i = 0; i < DATA.n - 1; i++) {
     const x1 = ptX(i);
@@ -229,9 +313,8 @@ function drawStep3() {
   buildRuler('rulerStep3', 700, Y_RUL);
   buildPoints('pointsStep3', [2, 3]);
 
-  const g = document.getElementById('highlightStep3');
+  const g = clearGroup('highlightStep3');
   if (!g) return;
-  g.innerHTML = '';
 
   [2, 3].forEach(i => {
     const ring = ns('circle');
@@ -250,9 +333,8 @@ function drawStep4() {
   buildRuler('rulerStep4', 700, Y_RUL);
   buildPoints('pointsStep4', [2, 3]);
 
-  const g = document.getElementById('displArrow');
+  const g = clearGroup('displArrow');
   if (!g) return;
-  g.innerHTML = '';
 
   const line = ns('line');
   line.setAttribute('x1', ptX(2));
@@ -270,9 +352,8 @@ function drawStep7() {
   buildRuler('rulerStep7', 700, Y_RUL);
   buildPoints('pointsStep7', [2, 3]);
 
-  const g = document.getElementById('vitArrow7');
+  const g = clearGroup('vitArrow7');
   if (!g) return;
-  g.innerHTML = '';
 
   const displ = ns('line');
   displ.setAttribute('x1', ptX(2));
@@ -333,4 +414,11 @@ function onSlideEnter(i) {
   }
 }
 
-goTo(0);
+function init() {
+  initDots();
+  applyVectorArrows();
+  updateUI();
+  onSlideEnter(0);
+}
+
+init();
