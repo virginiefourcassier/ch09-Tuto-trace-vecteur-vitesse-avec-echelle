@@ -30,15 +30,11 @@ const btnNext = document.getElementById('btnNext');
 const progressF = document.getElementById('progressFill');
 const navDots = document.getElementById('navDots');
 const stepBadge = document.getElementById('stepBadge');
-const slides = [...document.querySelectorAll('.slide')];
 
 for (let i = 0; i < TOTAL_SLIDES; i++) {
   const d = document.createElement('div');
   d.className = 'nav-dot' + (i === 0 ? ' active' : '');
-  d.addEventListener('click', (e) => {
-    e.stopPropagation();
-    goTo(i);
-  });
+  d.addEventListener('click', () => goTo(i));
   navDots.appendChild(d);
 }
 
@@ -62,6 +58,15 @@ function updateUI() {
   });
 }
 
+function showOnlySlide(index) {
+  document.querySelectorAll('.slide').forEach((slide, i) => {
+    slide.classList.remove('active', 'exit-left');
+    if (i === index) {
+      slide.classList.add('active');
+    }
+  });
+}
+
 function revealWithDelay(selector, className = 'revealed') {
   document.querySelectorAll(selector).forEach(el => {
     const delay = parseInt(el.dataset.delay || '0', 10);
@@ -73,27 +78,14 @@ function revealWithDelay(selector, className = 'revealed') {
 function goTo(idx) {
   if (idx < 0) idx = 0;
   if (idx > TOTAL_SLIDES - 1) idx = 0;
-  if (idx === current) return;
-
-  const oldSlide = document.getElementById('slide' + current);
-  const newSlide = document.getElementById('slide' + idx);
-
-  oldSlide.classList.remove('active');
-  oldSlide.classList.add('exit-left');
-
-  setTimeout(() => {
-    oldSlide.classList.remove('exit-left');
-  }, 400);
 
   current = idx;
-  newSlide.classList.add('active');
-
+  showOnlySlide(current);
   updateUI();
   onSlideEnter(current);
 }
 
-btnNext.addEventListener('click', (e) => {
-  e.stopPropagation();
+btnNext.addEventListener('click', () => {
   if (current === TOTAL_SLIDES - 1) {
     goTo(0);
   } else {
@@ -101,23 +93,8 @@ btnNext.addEventListener('click', (e) => {
   }
 });
 
-btnPrev.addEventListener('click', (e) => {
-  e.stopPropagation();
+btnPrev.addEventListener('click', () => {
   goTo(current - 1);
-});
-
-slides.forEach((slide, index) => {
-  slide.addEventListener('click', (e) => {
-    if (e.target.closest('button')) return;
-    if (e.target.closest('.nav-dot')) return;
-    if (index !== current) return;
-
-    if (current === TOTAL_SLIDES - 1) {
-      goTo(0);
-    } else {
-      goTo(current + 1);
-    }
-  });
 });
 
 function ns(tag) {
@@ -135,6 +112,7 @@ function buildGrid(parentId, W, H, yTrack, yRul) {
   for (let x = 0; x <= cmTotal + 0.01; x += sub) {
     const px = ML + x * PX;
     if (px > W - 15) break;
+
     const isCm = Math.abs(x - Math.round(x)) < 0.01;
     const isHalf = !isCm && Math.abs(x * 2 - Math.round(x * 2)) < 0.01;
 
@@ -235,6 +213,7 @@ function drawStep2() {
   for (let i = 0; i < DATA.n - 1; i++) {
     const x1 = ptX(i);
     const x2 = ptX(i + 1);
+
     const txt = ns('text');
     txt.setAttribute('x', (x1 + x2) / 2);
     txt.setAttribute('y', 55);
@@ -317,11 +296,26 @@ function drawStep7() {
 }
 
 function onSlideEnter(i) {
-  if (i === 1) revealWithDelay('#legendGrid1 .legend-item');
-  if (i === 2) drawStep2();
-  if (i === 3) drawStep3();
-  if (i === 4) drawStep4();
-  if (i === 5) revealWithDelay('#calcSteps .calc-line');
+  if (i === 1) {
+    revealWithDelay('#legendGrid1 .legend-item');
+  }
+
+  if (i === 2) {
+    drawStep2();
+  }
+
+  if (i === 3) {
+    drawStep3();
+  }
+
+  if (i === 4) {
+    drawStep4();
+  }
+
+  if (i === 5) {
+    revealWithDelay('#calcSteps .calc-line');
+  }
+
   if (i === 6) {
     document.querySelectorAll('#scaleVis [data-delay]').forEach(el => {
       const delay = parseInt(el.dataset.delay || '0', 10);
@@ -329,9 +323,14 @@ function onSlideEnter(i) {
       setTimeout(() => el.classList.add('revealed'), delay);
     });
   }
-  if (i === 7) drawStep7();
-  if (i === 8) revealWithDelay('.recap-card');
+
+  if (i === 7) {
+    drawStep7();
+  }
+
+  if (i === 8) {
+    revealWithDelay('.recap-card');
+  }
 }
 
-updateUI();
-onSlideEnter(0);
+goTo(0);
