@@ -106,14 +106,10 @@ btnPrev.addEventListener('click', (e) => {
   goTo(current - 1);
 });
 
-/* Correction du blocage :
-   on met le clic directement sur chaque slide */
 slides.forEach((slide, index) => {
   slide.addEventListener('click', (e) => {
-    if (e.target.closest('.nav-bar')) return;
     if (e.target.closest('button')) return;
     if (e.target.closest('.nav-dot')) return;
-
     if (index !== current) return;
 
     if (current === TOTAL_SLIDES - 1) {
@@ -123,32 +119,6 @@ slides.forEach((slide, index) => {
     }
   });
 });
-
-/* Vraies flèches de vecteurs dans les formules :
-   on transforme le contenu des .vec en ajoutant le combinant U+20D7 */
-function applyVectorArrows() {
-  document.querySelectorAll('.vec').forEach(el => {
-    if (el.dataset.vectorized === 'true') return;
-
-    const textNodes = [];
-    el.childNodes.forEach(node => {
-      if (node.nodeType === Node.TEXT_NODE) textNodes.push(node);
-    });
-
-    if (textNodes.length === 0) {
-      const raw = el.textContent.trim();
-      if (raw) {
-        el.innerHTML = raw.replace(/([A-Za-zM])/g, '$1\u20D7');
-      }
-    } else {
-      textNodes.forEach(node => {
-        node.textContent = node.textContent.replace(/([A-Za-zM])/g, '$1\u20D7');
-      });
-    }
-
-    el.dataset.vectorized = 'true';
-  });
-}
 
 function ns(tag) {
   return document.createElementNS('http://www.w3.org/2000/svg', tag);
@@ -167,6 +137,7 @@ function buildGrid(parentId, W, H, yTrack, yRul) {
     if (px > W - 15) break;
     const isCm = Math.abs(x - Math.round(x)) < 0.01;
     const isHalf = !isCm && Math.abs(x * 2 - Math.round(x * 2)) < 0.01;
+
     const line = ns('line');
     line.setAttribute('x1', px);
     line.setAttribute('x2', px);
@@ -362,6 +333,5 @@ function onSlideEnter(i) {
   if (i === 8) revealWithDelay('.recap-card');
 }
 
-applyVectorArrows();
 updateUI();
 onSlideEnter(0);
