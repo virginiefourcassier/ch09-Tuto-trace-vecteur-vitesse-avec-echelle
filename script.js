@@ -18,6 +18,12 @@ const ML = 55;
 const Y_TRK = 110;
 const Y_RUL = 165;
 
+/* Couleurs / style */
+const COLOR_DISPL = '#b04040';
+const COLOR_VEL = '#1e5fa0';   // bleu plus lisible
+const WIDTH_DISPL = 2;
+const WIDTH_VEL = 2.5;
+
 function ptX(i) {
   return ML + DATA.pos_cm[i] * PX;
 }
@@ -265,6 +271,23 @@ function buildPoints(parentId, highlight = []) {
   }
 }
 
+function updateMarkersColors() {
+  const arrowVitPath = document.querySelector('#arrowVit7 path');
+  if (arrowVitPath) {
+    arrowVitPath.setAttribute('fill', COLOR_VEL);
+  }
+
+  const arrowDisplPath = document.querySelector('#arrowDispl7 path');
+  if (arrowDisplPath) {
+    arrowDisplPath.setAttribute('fill', COLOR_DISPL);
+  }
+
+  const arrowDisplPath4 = document.querySelector('#arrowDispl path');
+  if (arrowDisplPath4) {
+    arrowDisplPath4.setAttribute('fill', COLOR_DISPL);
+  }
+}
+
 function drawStep2() {
   buildGrid('gridStep2', 700, 200, Y_TRK, Y_RUL);
   buildRuler('rulerStep2', 700, Y_RUL);
@@ -308,6 +331,8 @@ function drawStep3() {
 }
 
 function drawStep4() {
+  updateMarkersColors();
+
   buildGrid('gridStep4', 700, 200, Y_TRK, Y_RUL);
   buildRuler('rulerStep4', 700, Y_RUL);
   buildPoints('pointsStep4', [2, 3]);
@@ -320,39 +345,45 @@ function drawStep4() {
   line.setAttribute('y1', Y_TRK);
   line.setAttribute('x2', ptX(3));
   line.setAttribute('y2', Y_TRK);
-  line.setAttribute('stroke', '#b04040');
-  line.setAttribute('stroke-width', '3');
+  line.setAttribute('stroke', COLOR_DISPL);
+  line.setAttribute('stroke-width', String(WIDTH_DISPL));
   line.setAttribute('marker-end', 'url(#arrowDispl)');
   g.appendChild(line);
 }
 
 function drawStep7() {
+  updateMarkersColors();
+
   buildGrid('gridStep7', 700, 220, Y_TRK, Y_RUL);
   buildRuler('rulerStep7', 700, Y_RUL);
-  buildPoints('pointsStep7', [2, 3]);
 
   const g = clearGroup('vitArrow7');
   if (!g) return;
 
+  /* Flèche déplacement en arrière-plan */
   const displ = ns('line');
   displ.setAttribute('x1', ptX(2));
   displ.setAttribute('y1', Y_TRK + 16);
   displ.setAttribute('x2', ptX(3));
   displ.setAttribute('y2', Y_TRK + 16);
-  displ.setAttribute('stroke', '#b04040');
-  displ.setAttribute('stroke-width', '2');
+  displ.setAttribute('stroke', COLOR_DISPL);
+  displ.setAttribute('stroke-width', String(WIDTH_DISPL));
   displ.setAttribute('marker-end', 'url(#arrowDispl7)');
   g.appendChild(displ);
 
+  /* Vecteur vitesse : origine EXACTE en M2, plus fin, autre couleur */
   const vel = ns('line');
   vel.setAttribute('x1', ptX(2));
-  vel.setAttribute('y1', Y_TRK - 18);
+  vel.setAttribute('y1', Y_TRK);
   vel.setAttribute('x2', ptX(2) + DATA.fleche_cm * PX);
-  vel.setAttribute('y2', Y_TRK - 18);
-  vel.setAttribute('stroke', '#6a3fa0');
-  vel.setAttribute('stroke-width', '4');
+  vel.setAttribute('y2', Y_TRK);
+  vel.setAttribute('stroke', COLOR_VEL);
+  vel.setAttribute('stroke-width', String(WIDTH_VEL));
   vel.setAttribute('marker-end', 'url(#arrowVit7)');
   g.appendChild(vel);
+
+  /* Les points sont tracés APRES les flèches pour rester visibles au premier plan */
+  buildPoints('pointsStep7', [2, 3]);
 }
 
 function onSlideEnter(i) {
